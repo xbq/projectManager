@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理</title>
+    <link rel="icon" href="/public/images/title.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="/public/plugins/layui/css/layui.css">
+    {% block head %}{% endblock %}
+
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo"><a href="/admin" style="color: #009688;font-family: 'Microsoft YaHei';font-size: 25px">后台管理</a></div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a href="/">首页</a></li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="/public/images/tx.jpg" class="layui-nav-img">
+                    {{userInfo.username}}
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a id="btn_logout" href="javascript:;">退出</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree">
+                <li class="layui-nav-item">
+                    <a href="/manager/projectList">项目管理</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/manager/taskList">任务管理</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/manager/weeklyList">周报管理</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/manager/userList">人员管理</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/manager/statistics">信息汇总</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">
+            {% block main %}{% endblock %}
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        项目管理系统
+    </div>
+</div>
+
+</body>
+<script src="/public/plugins/layui/layui.all.js"></script>
+<script src="/public/js/manager/layout.js"></script>
+{% block js %}{% endblock %}
+</html>

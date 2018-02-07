@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+<link rel="stylesheet" href="/public/css/manager/userList.css">
+<div style="padding: 10px 20px;">
+    <span class="layui-breadcrumb">
+      <a href="/admin">管理首页</a>
+      <a><cite>任务列表</cite></a>
+    </span>
+    <form class="layui-form x-left layui-elem-quote" action="" style="padding:10px 15px;margin-bottom: 0;height: 38px;">
+        <div class="layui-form-pane">
+            <div class="layui-form-item">
+                <div class="layui-input-inline" style="width:140px">
+                    <input type="text" name="description"  autocomplete="off" placeholder="任务关键字" class="layui-input">
+                </div>
+                <div class="layui-input-inline" style="width:140px">
+                    <input type="text" name="executor"  autocomplete="off" placeholder="任务执行人" class="layui-input">
+                </div>
+                <div class="layui-input-inline" style="width:140px">
+                    <input type="text" name="taskTime" autocomplete="off" placeholder="工时数" class="layui-input">
+                </div>
+                <div class="layui-input-inline">
+                    <button class="layui-btn btn-blue" lay-submit="" lay-filter="searchTask"><i class="layui-icon">&#xe615;</i>查询</button>
+                </div>
+                <button class="layui-btn x-right btn-lightblue" lay-submit="" lay-filter="addTask" style="float: right"><i class="layui-icon">&#xe61f;</i>任务指派</button>
+            </div>
+        </div>
+    </form>
+    <table id="taskList" style="margin:10px 15px;" lay-filter="handler" ></table>
+    <script type="text/html" id="toolBar" >
+        <a class="layui-btn layui-btn-mini" lay-event="initPsw">查看</a>
+        <a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+    </script>
+</div>
+
+{%endblock%}
+{% block js %}
+<script src="/public/js/manager/taskList.js"></script>
+{% endblock %}

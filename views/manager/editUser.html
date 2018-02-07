@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>系统管理</title>
+    <link rel="stylesheet" href="/public/plugins/layui/css/layui.css">
+    <link rel="stylesheet" href="/public/css/admin/archive.css">
+</head>
+<body>
+
+<form class="layui-form" action="" style="margin-top: 20px;padding-right: 20px">
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="text-align: center">用户名</label>
+        <div class="layui-input-block">
+            <input type="text" id="username"  name="username" lay-verify="required" autocomplete="off" placeholder="请输入用户名" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="text-align: center">手机号</label>
+        <div class="layui-input-block">
+            <input type="text" id="tel" name="tel" lay-verify="required|phone" autocomplete="off" placeholder="请输入手机号" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="text-align: center">部门</label>
+        <div class="layui-input-block">
+            <select id="department" name="department" lay-search="">
+                <option value="">请选择部门</option>
+                <option value="数据运营事业部" >数据运营事业部</option>
+                <option value="工程部" >工程部</option>
+                <option value="仪器事业部">仪器事业部</option>
+                <option value="市场部">市场部</option>
+                <option value="行政部">行政部</option>
+            </select>
+        </div>
+
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="text-align: center">角色</label>
+        <div class="layui-input-block" >
+            <select id="role" name="role" lay-search="">
+                <option value="">请选择角色</option>
+                <option value="董事长">董事长</option>
+                <option value="总经理">总经理</option>
+                <option value="总监">总监</option>
+                <option value="副总监">副总监</option>
+                <option value="项目经理">项目经理</option>
+                <option value="研发工程师">研发工程师</option>
+                <option value="实施人员">实施人员</option>
+                <option value="技术支持">技术支持</option>
+            </select>
+        </div>
+    </div>
+    <input type="hidden" name="_id">
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="editUser" style="color: #fff;background: #1789FF;">提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+</body>
+<script src="/public/plugins/layui/layui.all.js"></script>
+<script src="/public/js/manager/editUser.js"></script>
+</html>
