@@ -10,6 +10,10 @@ var task = new Schema({
         type:Schema.Types.ObjectId,
         ref:'User'
     },
+    project:{
+        type:Schema.Types.ObjectId,
+        ref:'Project'
+    },
     isPublish:{
         type:Boolean,
         default:false

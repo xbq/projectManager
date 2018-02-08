@@ -9,6 +9,7 @@ layui.use(['form'], function(){
     form.on('submit(publishTask)', function(data) {
         data.field.isPublish=true;
         data.field.publishTime = new Date();
+        data.field.practiceTime = data.field.predictTime;
         $.ajax({
             type: 'POST',
             url:'/task/add',
@@ -19,7 +20,6 @@ layui.use(['form'], function(){
                         content: res.message,
                         yes: function(index, layero) {
                             closeParentLayer();
-                            parent.document.getElementsByClassName('layui-laypage-btn')[0].click();
                         }
                     });
                 } else {

@@ -24,7 +24,7 @@
         <label class="layui-form-label" style="text-align: center">任务指派</label>
         <div class="layui-input-block">
             <select name="executor" lay-search="">
-                <option value="" selected>请选择部门</option>
+                <option value="" selected>请选择项目执行人员</option>
                 {% for executor in executors%}
                 <option value="{{executor._id.toString()}}">{{executor.username}}</option>
                 {% endfor %}

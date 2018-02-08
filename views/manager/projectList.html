@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+<link rel="stylesheet" href="/public/css/manager/userList.css">
+<div style="padding: 10px 20px;">
+    <span class="layui-breadcrumb">
+      <a href="/admin">管理首页</a>
+      <a><cite>项目列表</cite></a>
+    </span>
+    <form class="layui-form x-left layui-elem-quote" action="" style="padding:10px 15px;margin-bottom: 0;height: 38px;">
+        <div class="layui-form-pane">
+            <div class="layui-form-item">
+                <div class="layui-input-inline" style="width:140px">
+                    <input type="text" name="description"  autocomplete="off" placeholder="项目描述关键字" class="layui-input">
+                </div>
+                <div class="layui-input-inline" style="width:140px">
+                    <input type="text" name="executor"  autocomplete="off" placeholder="项目经理" class="layui-input">
+                </div>
+                <div class="layui-input-inline" style="width:140px">
+                    <input type="text" name="number"  autocomplete="off" placeholder="项目编号" class="layui-input">
+                </div>
+                <div class="layui-input-inline">
+                    <button class="layui-btn btn-blue" lay-submit="" lay-filter="searchProject"><i class="layui-icon">&#xe615;</i>查询</button>
+                </div>
+                <button class="layui-btn x-right btn-lightblue" lay-submit="" lay-filter="addProject" style="float: right"><i class="layui-icon">&#xe61f;</i>录入项目</button>
+            </div>
+        </div>
+    </form>
+    <table id="projectList" style="margin:10px 15px;" lay-filter="handler" ></table>
+    <script type="text/html" id="toolBar" >
+        <a class="layui-btn layui-btn-mini" lay-event="initPsw">查看</a>
+        <a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+    </script>
+</div>
+
+{%endblock%}
+{% block js %}
+<script src="/public/js/manager/projectList.js"></script>
+{% endblock %}

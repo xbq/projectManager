@@ -57,10 +57,20 @@ router.get('/editUser',function (req,res) {
 
 
 /**
- * 用户管理页面跳转
+ * 任务管理页面跳转
  */
-router.get('/taskList',function (req,res,next) {
+router.get('/taskList',function (req,res) {
     res.render('manager/taskList',{
+        userInfo:req.userInfo
+    });
+});
+
+
+/**
+ * 项目管理页面跳转
+ */
+router.get('/projectList',function (req,res) {
+    res.render('manager/projectList',{
         userInfo:req.userInfo
     });
 });

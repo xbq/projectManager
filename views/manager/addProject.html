@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>系统管理</title>
+    <link rel="stylesheet" href="/public/plugins/layui/css/layui.css">
+    <link rel="stylesheet" href="/public/css/admin/archive.css">
+</head>
+<body>
+<form class="layui-form" action="" style="margin-top: 20px;padding-right: 20px">
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="text-align: center">项目名称</label>
+        <div class="layui-input-inline" style="width: 280px;margin-right: 0">
+            <input type="text" name="name" placeholder="输入项目名称" class="layui-input">
+        </div>
+        <label class="layui-form-label" style="text-align: center">项目编号</label>
+        <div class="layui-input-inline" style="width: 280px;margin-right: 0">
+            <input type="text" name="number" placeholder="输入项目编号" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="text-align: center">项目描述</label>
+        <div class="layui-input-block">
+            <textarea name="description" placeholder="请输入项目描述" class="layui-textarea" style="height: 220px;"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="text-align: center">预计经费</label>
+        <div class="layui-input-inline" style="width: 280px;margin-right: 0">
+            <input type="text" name="budget" placeholder="输入预计经费" class="layui-input">
+        </div>
+        <label class="layui-form-label" style="text-align: center">项目经理</label>
+        <div class="layui-input-inline" style="width: 280px;margin-right: 0">
+            <select name="manager" lay-search="">
+                <option value="" selected>请选择项目经理</option>
+                {% for manager in managers%}
+                <option value="{{manager._id.toString()}}">{{manager.username}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block" style="text-align: right;">
+            <button class="layui-btn" lay-submit lay-filter="addProject" style="color: #fff;background: #1789FF;">提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+</body>
+<script src="/public/plugins/layui/layui.all.js"></script>
+<script src="/public/js/manager/addProject.js"></script>
+</html>

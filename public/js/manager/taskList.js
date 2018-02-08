@@ -13,14 +13,25 @@ layui.use(['table','form','layer'], function(){
         ,layout:['count','prev', 'page', 'next','limit','skip']
         ,cols: [[ //表头
             {field: 'description',width:200,  title: '任务描述'}
-            ,{field: 'taskTime',width:200,  title: '预计工时数' }
-            ,{field: 'executor',width:200,  title: '任务执行人'}
-            ,{field: 'isPublish',width:200,  title: '是否发布'}
-            ,{field: 'isApproved',width:200,  title: '是否审批通过'}
+            ,{field: 'predictTime',width:200,  title: '预计工时数' }
+            ,{field: 'practiceTime',width:200,  title: '实际工时数' }
+            ,{width:200,  title: '任务执行人',templet:'<div>{{d.executor.username}}</div>'}
+            ,{field: 'isPublish',width:200,  title: '是否发布',templet:'<div>{{d.executor.isPublish?"是":"否"}}</div>'}
+            ,{field: 'isApproved',width:200,  title: '是否审批通过',templet:'<div>{{d.executor.isPublish?"是":"否"}}</div>'}
             ,{fixed: 'right', width:200, align:'center', toolbar: '#toolBar',title:'操作'}
         ]],
         limits:[1,10,20,50,100],
-        limit:20
+        limit:20,
+        jump: function(obj, first){
+            //obj包含了当前分页的所有参数，比如：
+            console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+            console.log(obj.limit); //得到每页显示的条数
+
+            //首次不执行
+            if(!first){
+                //do something
+            }
+        }
     });
 
     //监听提交
@@ -40,14 +51,22 @@ layui.use(['table','form','layer'], function(){
             resize: false,
             shade: false,
             area: ['600px', '350px'],
-            content: '/task/add'
+            content: '/task/add',
+            end:function(){
+                if($('.layui-laypage-btn')[0]){
+                    $('.layui-laypage-btn')[0].click();
+                }else{
+                    userTable.reload({
+                        url: '/task/list'
+                    });
+                }
+            }
         });
         return false
     });
 
 
     table.on('tool(handler)', function(obj) {
-        console.log(obj);
         var data = obj.data,
             layEvent = obj.event;
         var _id = data._id;
@@ -57,12 +76,19 @@ layui.use(['table','form','layer'], function(){
                 layer.close(index);
                 $.ajax({
                     type: 'GET',
-                    url: '/user/delete?_id=' + _id,
+                    url: '/task/delete?_id=' + _id,
                     success: function(data) {
                         layer.msg(data.message, {
                             icon: 1,
                             time: 1000
                         });
+                        if($('.layui-laypage-btn')[0]){
+                            $('.layui-laypage-btn')[0].click();
+                        }else{
+                            userTable.reload({
+                                url: '/task/list'
+                            });
+                        }
                     }
                 });
             });
@@ -74,30 +100,16 @@ layui.use(['table','form','layer'], function(){
                 resize: false,
                 shade: 0.4,
                 title: '用户信息编辑',
-                content: '/manager/editUser?_id='+_id
-            });
-        }else if(layEvent==='initPsw'){
-            layer.confirm('确认初始化改用户的密码',function(index){
-                layer.close(index);
-                $.ajax({
-                    url:'/user/initPsw?_id='+_id,
-                    success:function(res){
-                        if(!res.code) {
-                            layer.open({
-                                content: res.message,
-                                yes: function(index, layero) {
-                                    closeParentLayer();
-                                    parent.document.getElementsByClassName('layui-laypage-btn')[0].click();
-                                }
-                            });
-                        } else {
-                            layer.msg(res.message, {
-                                icon: 5,
-                                shift: 6
-                            });
-                        }
+                content: '/manager/editTask?_id='+_id,
+                end:function(){
+                    if($('.layui-laypage-btn')[0]){
+                        $('.layui-laypage-btn')[0].click();
+                    }else{
+                        userTable.reload({
+                            url: '/task/list'
+                        });
                     }
-                });
+                }
             });
         }
     });

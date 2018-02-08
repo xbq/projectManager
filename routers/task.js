@@ -29,7 +29,8 @@ router.get('/list',function (req,res) {
     var limit = Number(req.query.limit||10);
     var skip = (page-1)*limit;
     Task.count().then(function (count) {
-        Task.find().skip(skip).limit(limit).populate('user').then(function (tasks) {
+        Task.find().skip(skip).limit(limit).populate('executor','username').then(function (tasks) {
+            console.log(tasks);
             res.json({
                 code:0,
                 count:count,
