@@ -25,7 +25,10 @@ router.use(function (req,res,next) {
  */
 router.get('/',function (req,res,next) {
     res.render('manager/index',{
-        userInfo:req.userInfo
+        userInfo:{
+            username:new Buffer(req.userInfo.username, 'base64').toString(),
+            role:new Buffer(req.userInfo.role, 'base64').toString()
+        }
     });
 });
 
@@ -34,7 +37,10 @@ router.get('/',function (req,res,next) {
  */
 router.get('/userList',function (req,res,next) {
     res.render('manager/userList',{
-        userInfo:req.userInfo
+        userInfo:{
+            username:new Buffer(req.userInfo.username, 'base64').toString(),
+            role:new Buffer(req.userInfo.role, 'base64').toString()
+        }
     });
 });
 
@@ -43,7 +49,10 @@ router.get('/userList',function (req,res,next) {
  */
 router.get('/addUser',function (req,res) {
     res.render('manager/addUser',{
-        userInfo:req.userInfo
+        userInfo:{
+            username:new Buffer(req.userInfo.username, 'base64').toString(),
+            role:new Buffer(req.userInfo.role, 'base64').toString()
+        }
     });
 });
 /**
@@ -51,7 +60,10 @@ router.get('/addUser',function (req,res) {
  */
 router.get('/editUser',function (req,res) {
     res.render('manager/editUser',{
-        userInfo:req.userInfo
+        userInfo:{
+            username:new Buffer(req.userInfo.username, 'base64').toString(),
+            role:new Buffer(req.userInfo.role, 'base64').toString()
+        }
     });
 });
 
@@ -61,7 +73,10 @@ router.get('/editUser',function (req,res) {
  */
 router.get('/taskList',function (req,res) {
     res.render('manager/taskList',{
-        userInfo:req.userInfo
+        userInfo:{
+            username:new Buffer(req.userInfo.username, 'base64').toString(),
+            role:new Buffer(req.userInfo.role, 'base64').toString()
+        }
     });
 });
 
@@ -71,7 +86,34 @@ router.get('/taskList',function (req,res) {
  */
 router.get('/projectList',function (req,res) {
     res.render('manager/projectList',{
-        userInfo:req.userInfo
+        userInfo:{
+            username:new Buffer(req.userInfo.username, 'base64').toString(),
+            role:new Buffer(req.userInfo.role, 'base64').toString()
+        }
+    });
+});
+
+/**
+ * 周报管理页面跳转
+ */
+router.get('/weeklyList',function (req,res) {
+    res.render('manager/weeklyList',{
+        userInfo:{
+            username:new Buffer(req.userInfo.username, 'base64').toString(),
+            role:new Buffer(req.userInfo.role, 'base64').toString()
+        }
+    });
+});
+
+/**
+ * 添加周报
+ */
+router.get('/addWeekly',function (req,res) {
+    res.render('manager/addWeekly',{
+        userInfo:{
+            username:new Buffer(req.userInfo.username, 'base64').toString(),
+            role:new Buffer(req.userInfo.role, 'base64').toString()
+        }
     });
 });
 

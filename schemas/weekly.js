@@ -2,13 +2,22 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var user = new Schema({
-    startTime:Date,
-    endTime:Date,
-    task:String,
-    taskTime:Number,
-    process:String,
-    isApprove:Boolean
+var weekly = new Schema({
+    startTime: Date,
+    endTime: Date,
+    taskDesc: String,
+    taskTime: Number,
+    approveTaskTime: Number,
+    process: String,
+    project: {
+        type: Schema.Types.ObjectId,
+        ref: 'Project'
+    },
+    isApprove: Boolean,
+    executor: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }
 });
 
-module.exports = user;
+module.exports = weekly;

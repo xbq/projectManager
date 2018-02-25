@@ -14,11 +14,9 @@ router.use(function(req,res,next){
 });
 
 router.post('/login',function (req,res) {
-    console.log(req.body);
     if(req&&req.body){
         //查询数据库，验证用户名密码是否正确
         User.findOne(req.body).then(function(userInfo){
-            console.log(userInfo);
             if(!userInfo){
                 responseData.code=3;
                 responseData.message= "用户名或密码错误";
@@ -27,7 +25,7 @@ router.post('/login',function (req,res) {
             }else{
                 responseData.message="登陆成功";
                 req.cookies.set('userInfo',JSON.stringify({
-                    _id:userInfo._id,
+                    _id:userInfo._id.toString(),
                     username:new Buffer(userInfo.username).toString('base64'),
                     role:new Buffer(userInfo.role).toString('base64')
                 }));

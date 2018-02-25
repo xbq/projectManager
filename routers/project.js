@@ -122,7 +122,8 @@ router.get('/edit',function (req,res) {
     //添加初始密码
     Project.findOne(req.query).then(function (project) {
         res.json({
-            user:project
+            project:project,
+            userInfo:req.userInfo
         });
     });
 });

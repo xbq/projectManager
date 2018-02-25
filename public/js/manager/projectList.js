@@ -35,7 +35,7 @@ layui.use(['table','form','layer'], function(){
     form.on('submit(addProject)', function() {
         layer.open({
             type: 2,
-            title: '添加任务',
+            title: '添加项目',
             shadeClose: true,
             resize: false,
             shade: false,
@@ -72,8 +72,8 @@ layui.use(['table','form','layer'], function(){
                 fix: false,
                 resize: false,
                 shade: 0.4,
-                title: '用户信息编辑',
-                content: '/manager/editProject?_id='+_id
+                title: '项目信息编辑',
+                content: '/project/edit?_id='+_id
             });
         }
     });
