@@ -1,6 +1,21 @@
-layui.use(['form'], function(){
+layui.use(['form','laydate'], function(){
     var $ = layui.jquery;
     var form = layui.form;
+    var laydate = layui.laydate;
+
+    laydate.render({
+       elem:'#startTime'
+    });
+    laydate.render({
+        elem:'#endTime'
+    });
+    laydate.render({
+        elem:'#preStartTime'
+    });
+    laydate.render({
+        elem:'#preEndTime'
+    });
+
     $(function(){
         form.render();
     });
@@ -20,7 +35,7 @@ layui.use(['form'], function(){
                         yes: function(index, layero) {
                             closeParentLayer();
                             if(parent.document.getElementsByClassName('layui-laypage-btn')[0]){
-
+                                parent.document.getElementsByClassName('layui-laypage-btn')[0].click();
                             }else{
                                 parent.table.render({ //其它参数省略
                                     id: 'projectList'

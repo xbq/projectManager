@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/User');
+var Project = require('../models/Project');
 //统一返回格式
 var responseData = {};
 
@@ -15,7 +16,7 @@ router.use(function(req,res,next){
 
 router.use(function (req,res,next) {
     if(!req.userInfo.username){
-        res.send('对不起，只有管理员才能进入此页面');
+        res.send('对不起，请返回登录页面进入系统！');
         return;
     }
     next();
@@ -94,15 +95,34 @@ router.get('/projectList',function (req,res) {
 });
 
 /**
+ * 项目编辑页面跳转
+ */
+router.get('/editProject',function (req,res) {
+
+    res.render('manager/editProject',{
+        userInfo:{
+            username:new Buffer(req.userInfo.username, 'base64').toString(),
+            role:new Buffer(req.userInfo.role, 'base64').toString(),
+            _id:req.userInfo._id
+        }
+    });
+});
+
+/**
  * 周报管理页面跳转
  */
 router.get('/weeklyList',function (req,res) {
-    res.render('manager/weeklyList',{
-        userInfo:{
-            username:new Buffer(req.userInfo.username, 'base64').toString(),
-            role:new Buffer(req.userInfo.role, 'base64').toString()
-        }
+    Project.find().then(function(projects){
+        res.render('manager/weeklyList',{
+            userInfo:{
+                username:new Buffer(req.userInfo.username, 'base64').toString(),
+                role:new Buffer(req.userInfo.role, 'base64').toString(),
+                _id:req.userInfo._id
+            },
+            projects:projects
+        });
     });
+
 });
 
 /**
@@ -112,9 +132,46 @@ router.get('/addWeekly',function (req,res) {
     res.render('manager/addWeekly',{
         userInfo:{
             username:new Buffer(req.userInfo.username, 'base64').toString(),
+            role:new Buffer(req.userInfo.role, 'base64').toString(),
+            _id:req.userInfo._id
+        }
+    });
+});
+
+/**
+ *用户添加页面跳转
+ */
+router.get('/editWeekly',function (req,res) {
+    res.render('manager/editWeekly',{
+        userInfo:{
+            username:new Buffer(req.userInfo.username, 'base64').toString(),
             role:new Buffer(req.userInfo.role, 'base64').toString()
         }
     });
 });
 
+/**
+ *周报审批页面跳转
+ */
+router.get('/approveWeekly',function (req,res) {
+    res.render('manager/approveWeekly',{
+        userInfo:{
+            username:new Buffer(req.userInfo.username, 'base64').toString(),
+            role:new Buffer(req.userInfo.role, 'base64').toString(),
+            _id:req.userInfo._id
+        }
+    });
+});
+
+/**
+ *周报详情页面跳转
+ */
+router.get('/detailWeekly',function (req,res) {
+    res.render('manager/detailWeekly',{
+        userInfo:{
+            username:new Buffer(req.userInfo.username, 'base64').toString(),
+            role:new Buffer(req.userInfo.role, 'base64').toString()
+        }
+    });
+});
 module.exports=router;

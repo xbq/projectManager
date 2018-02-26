@@ -34,13 +34,22 @@
                 {% endfor %}
             </select>
         </div>
+
         <label class="layui-form-label" style="text-align: center">参考工时</label>
         <div class="layui-input-inline" style="width: 280px;margin-right: 0">
             <input type="text" name="taskTime" placeholder="输入参考工时" class="layui-input">
         </div>
     </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="text-align: center">完成状态</label>
+        <div class="layui-input-inline" style="width: 280px;margin-right: 0">
+            <input type="radio" name="process" value="已完成" title="已完成" checked="">
+            <input type="radio" name="process" value="未完成" title="未完成">
+        </div>
+    </div>
     <input type="hidden" name="executor" value="{{userInfo._id}}">
     <input type="hidden" id="role" value="{{userInfo.role}}">
+    <input type="hidden" name="isApprove" value="尚未审批">
     <div class="layui-form-item">
         <div class="layui-input-block" style="text-align: right;padding-right: 20px;">
             <button class="layui-btn" lay-submit lay-filter="addWeekly" style="color: #fff;background: #1789FF;">提交</button>

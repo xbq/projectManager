@@ -64,6 +64,25 @@ router.get('/find',function (req,res) {
     })
 });
 
+//项目查询接口
+router.get('/isProjectManger',function (req,res) {
+    var projectId = req.query.projectId;
+    var userId = req.query.userId;
+    var queryBody ={};
+    if(projectId&&userId){
+        queryBody._id = projectId;
+        queryBody.manager = userId;
+        Project.findOne(queryBody).then(function (project) {
+            if(project){
+                res.json({
+                    isProjectManger:true
+                })
+            }
+        });
+    }
+
+});
+
 //删除项目
 router.get('/delete',function (req,res) {
     var task = new Project(req.query);
@@ -119,13 +138,24 @@ router.post('/update',function (req,res) {
 
 //编辑项目页面跳转
 router.get('/edit',function (req,res) {
-    //添加初始密码
-    Project.findOne(req.query).then(function (project) {
-        res.json({
-            project:project,
-            userInfo:req.userInfo
+    User.find().then(function (users) {
+        res.render('manager/editProject',{
+            userInfo:req.userInfo,
+            managers:users
         });
     });
 });
+
+//编辑项目页面跳转
+router.get('/findOneById',function (req,res) {
+    //添加初始密码
+    Project.findOne(req.query).then(function (project) {
+        res.json({
+            project:project
+        });
+    });
+});
+
+
 
 module.exports = router;

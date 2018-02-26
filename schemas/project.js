@@ -10,6 +10,11 @@ var project = new Schema({
         type:Schema.Types.ObjectId,
         ref:'User'
     },
-    budget:String
+    budget:String,
+    startTime:Date,
+    endTime:Date,
+    preStartTime:Date,
+    preEndTime:Date,
+    state:String
 });
 module.exports = project;

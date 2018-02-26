@@ -11,7 +11,29 @@
         <div class="layui-form-pane">
             <div class="layui-form-item">
                 <div class="layui-input-inline" style="width:140px">
-                    <input type="text" name="description"  autocomplete="off" placeholder="任务描述关键字" class="layui-input">
+                    <input type="text" name="taskDesc"  autocomplete="off" placeholder="任务描述关键字" class="layui-input">
+                </div>
+                <div class="layui-input-inline" style="width:140px">
+                    <select name="project" lay-search="">
+                        <option value="">请选择所属项目</option>
+                        {% for project in projects %}
+                        <option value="{{project._id.toString()}}">{{project.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="layui-input-inline" style="width:140px">
+                    <select  name="process" lay-search="">
+                        <option value="" selected>选择完成状态</option>
+                        <option value="已完成">已完成</option>
+                        <option value="未完成">未完成</option>
+                    </select>
+                </div>
+                <div class="layui-input-inline" style="width:140px">
+                    <select  name="isApprove" lay-search="">
+                        <option value="" selected>选择审批状态</option>
+                        <option value="是">是</option>
+                        <option value="否">否</option>
+                    </select>
                 </div>
                 <div class="layui-input-inline">
                     <button class="layui-btn btn-blue" lay-submit="" lay-filter="searchWeekly"><i class="layui-icon">&#xe615;</i>查询</button>
@@ -22,11 +44,12 @@
     </form>
     <table id="weeklyTable" style="margin:10px 15px;" lay-filter="handler" ></table>
     <script type="text/html" id="toolBar" >
-        <a class="layui-btn layui-btn-mini" lay-event="initPsw">查看</a>
+        <a class="layui-btn layui-btn-mini" lay-event="detail">查看</a>
         <a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-mini layui-btn-mini" lay-event="approve">审批</a>
         <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
-        <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="appr">审批</a>
     </script>
+    <input type="hidden" id="current" value="{{userInfo._id}}">
 </div>
 
 {%endblock%}

@@ -26,8 +26,7 @@ router.get('/list',function (req,res) {
     var limit = Number(req.query.limit||10);
     var skip = (page-1)*limit;
     Weekly.count().then(function (count) {
-        Weekly.find().skip(skip).limit(limit).populate('project').populate('executor').then(function (weeklies) {
-            console.log(weeklies);
+        Weekly.find().skip(skip).limit(limit).populate('project').populate('executor').populate('approver').then(function (weeklies) {
             res.json({
                 code:0,
                 count:count,
@@ -37,6 +36,44 @@ router.get('/list',function (req,res) {
         });
     })
 });
+
+
+
+//项目查询接口
+router.get('/find',function (req,res) {
+    var page = req.query.page||1;
+    var limit = Number(req.query.limit||10);
+    var skip = (page-1)*limit;
+    var taskDesc = req.query.taskDesc||'';
+    var project = req.query.project||'';
+    var isApprove = req.query.isApprove||'';
+    var process = req.query.process||'';
+    var queryBody ={};
+    if(taskDesc){
+        queryBody.taskDesc = {$regex:taskDesc};
+    }
+    if(process){
+        queryBody.process = {$regex:process};
+    }
+    if(isApprove){
+        queryBody.isApprove = {$regex:isApprove};
+    }
+    if(project){
+        //这里就不进行模糊查询了，直接将id值赋过去
+        queryBody.project = project;
+    }
+    Weekly.count(queryBody).then(function (count) {
+        Weekly.find(queryBody).populate('project').populate('executor').skip(skip).limit(limit).then(function (weeklies) {
+            res.json({
+                code:0,
+                count:count,
+                data:weeklies,
+                message:""
+            });
+        });
+    })
+});
+
 
 //周报列表
 router.get('/add',function (req,res) {
@@ -60,6 +97,44 @@ router.post('/add',function (req,res) {
         }
         res.json(responseData);
     });
+});
+
+//周报修改页面跳转
+router.get('/edit',function (req,res) {
+    //将项目列表传入页面
+    Project.find().then(function (projects) {
+        Weekly.findOne(req.query).then(function(weekly){
+            res.json({
+                userInfo:req.userInfo,
+                projects:projects,
+                weekly:weekly
+            });
+        })
+    });
+});
+
+//周报修改
+router.post('/update',function (req,res) {
+     Weekly.findOneAndUpdate({_id:req.body._id},req.body).then(function (weekly) {
+        if(weekly){
+            responseData.message="修改成功";
+        }else{
+            responseData.code = 1;
+            responseData.message = "修改失败";
+        }
+        res.json(responseData);
+    });
+});
+
+//周报审批页面取值
+router.get('/approve',function (req,res) {
+    //将周报信息传入页面
+    Weekly.findOne(req.query).populate('project').populate('executor').then(function(weekly){
+        res.json({
+            userInfo:req.userInfo,
+            weekly:weekly
+        });
+    })
 });
 
 

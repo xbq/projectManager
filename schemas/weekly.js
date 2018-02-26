@@ -13,8 +13,13 @@ var weekly = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Project'
     },
-    isApprove: Boolean,
+    isApprove: String,
     executor: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    approveOpinion:String,
+    approver:{
         type: Schema.Types.ObjectId,
         ref: 'User'
     }

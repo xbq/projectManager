@@ -21,7 +21,8 @@
     <div class="layui-form-item">
         <label class="layui-form-label" style="text-align: center">项目描述</label>
         <div class="layui-input-block">
-            <textarea name="description" placeholder="请输入项目描述" class="layui-textarea" style="height: 220px;width: 670px;"></textarea>
+            <textarea name="description" placeholder="请输入项目描述" class="layui-textarea"
+                      style="height: 220px;width: 670px;"></textarea>
         </div>
     </div>
     <div class="layui-form-item">
@@ -39,10 +40,41 @@
             </select>
         </div>
     </div>
-
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="text-align: center;width: 110px;padding: 9px 0px;">预计开始时间</label>
+        <div class="layui-input-inline" style="width: 280px;margin-right: 0">
+            <input type="text" class="layui-input" id="preStartTime" name="preStartTime" placeholder="yyyy-MM-dd">
+        </div>
+        <label class="layui-form-label" style="text-align: center;width: 110px;padding: 9px 0px;">预计结束时间</label>
+        <div class="layui-input-inline" style="width: 280px;margin-right: 0">
+            <input type="text" class="layui-input" id="preEndTime" name="preEndTime" placeholder="yyyy-MM-dd">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="text-align: center">开始时间</label>
+        <div class="layui-input-inline" style="width: 280px;margin-right: 0">
+            <input type="text" class="layui-input" id="startTime" name="startTime" placeholder="yyyy-MM-dd">
+        </div>
+        <label class="layui-form-label" style="text-align: center">结束时间</label>
+        <div class="layui-input-inline" style="width: 280px;margin-right: 0">
+            <input type="text" class="layui-input" id="endTime" name="endTime" placeholder="yyyy-MM-dd">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="text-align: center">项目状态</label>
+        <div class="layui-input-inline" style="width: 280px;margin-right: 0">
+            <select name="state" lay-search="">
+                <option value="" selected>请选择状态</option>
+                <option value="未开始" selected>未开始</option>
+                <option value="进行中" selected>进行中</option>
+                <option value="已完成" selected>已完成</option>
+            </select>
+        </div>
+    </div>
     <div class="layui-form-item">
         <div class="layui-input-block" style="text-align: right;padding-right: 20px;">
-            <button class="layui-btn" lay-submit lay-filter="addProject" style="color: #fff;background: #1789FF;">提交</button>
+            <button class="layui-btn" lay-submit lay-filter="addProject" style="color: #fff;background: #1789FF;">提交
+            </button>
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
     </div>

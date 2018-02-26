@@ -1,4 +1,4 @@
-function Base64() {
+var Base64 = function() {
  
     // private property
     _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";

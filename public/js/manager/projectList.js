@@ -14,9 +14,13 @@ layui.use(['table','form','layer'], function(){
         ,cols: [[ //表头
             {field: 'number',width:200,  title: '项目编号'}
             ,{field: 'name',width:200,  title: '项目名称' }
-            ,{field: 'budget',width:200,  title: '项目预算' }
-            ,{width:200,  title: '项目经理',templet:'<div>{{d.manager.username}}</div>'}
-            ,{field: 'state',width:200,  title: '项目状态'}
+            ,{field: 'budget',width:100,  title: '项目预算' }
+            ,{width:100,  title: '项目经理',templet:'<div>{{d.manager.username}}</div>'}
+            , {field: 'preStartTime', width: 120, title: '预计开始时间', templet: '<div>{{d.preStartTime?d.preStartTime.split("T")[0]:""}}</div>'}
+            , {field: 'preEndTime', width: 120, title: '预计结束时间', templet: '<div>{{d.preEndTime?d.preEndTime.split("T")[0]:""}}</div>'}
+            , {field: 'startTime', width: 120, title: '开始时间', templet: '<div>{{d.startTime?d.startTime.split("T")[0]:""}}</div>'}
+            , {field: 'endTime', width: 120, title: '结束时间', templet: '<div>{{d.endTime?d.endTime.split("T")[0]:""}}</div>'}
+            ,{field: 'state',width:100,  title: '项目状态'}
             ,{fixed: 'right', width:200, align:'center', toolbar: '#toolBar',title:'操作'}
         ]],
         limits:[1,10,20,50,100],
@@ -39,7 +43,7 @@ layui.use(['table','form','layer'], function(){
             shadeClose: true,
             resize: false,
             shade: false,
-            area: ['800px', '510px'],
+            area: ['800px', '600px'],
             content: '/project/add'
         });
         return false
@@ -68,7 +72,7 @@ layui.use(['table','form','layer'], function(){
         } else if(layEvent === 'edit') {
             layer.open({
                 type: 2,
-                area: ['500px', '350px'],
+                area: ['800px', '650px'],
                 fix: false,
                 resize: false,
                 shade: 0.4,
@@ -77,5 +81,4 @@ layui.use(['table','form','layer'], function(){
             });
         }
     });
-
 });

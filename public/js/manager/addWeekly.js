@@ -4,6 +4,7 @@ layui.use(['form'], function(){
 
     var laydate = layui.laydate;
 
+    var role = "";
     //应用layui时间组件
     laydate.render({
         elem: '#startTime'
@@ -15,7 +16,9 @@ layui.use(['form'], function(){
 
     $(function(){
         form.render();
-        console.log($("#role").val());
+        //这儿待处理，#role的值是base64编码之后的，需要解码
+        var Base = new Base64();
+        role = Base.decode($("#role").val());
     });
 
     //监听提交
